@@ -1,0 +1,6 @@
+{
+  "name": "Kaasu Kudu Kaasu",
+  "description": "Bachelor room expense management application with multi-room support, expense splitting, UPI settlements, and audit tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

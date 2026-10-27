@@ -1,0 +1,90 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile containing identity and UPI payment info",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth user ID" },
+        "fullName": { "type": "string", "description": "Full display name" },
+        "username": { "type": "string", "description": "Unique username handle" },
+        "email": { "type": "string", "description": "Email address" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "upiId": { "type": "string", "description": "UPI payment VPA address" },
+        "isAdmin": { "type": "boolean", "description": "Whether user has room administrator privileges" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of creation" }
+      },
+      "required": ["uid", "fullName", "email"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Shared bachelor accommodation workspace",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique room ID" },
+        "name": { "type": "string", "description": "Room or apartment name" },
+        "code": { "type": "string", "description": "Room invite code" },
+        "adminUid": { "type": "string", "description": "UID of room creator" },
+        "memberUids": { "type": "array", "description": "List of member UIDs" },
+        "currency": { "type": "string", "description": "Currency code (default INR)" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["id", "name", "adminUid", "memberUids"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Room expense entry with split amounts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Expense ID" },
+        "roomId": { "type": "string", "description": "Room ID" },
+        "title": { "type": "string", "description": "Title or reason for expense" },
+        "amountPaise": { "type": "integer", "description": "Total amount in paise" },
+        "paidByUid": { "type": "string", "description": "UID of the payer" },
+        "paidByName": { "type": "string", "description": "Display name of payer" },
+        "splitType": { "type": "string", "description": "EQUAL, UNEQUAL, or PERCENTAGE" },
+        "participantUids": { "type": "array", "description": "UIDs of participants splitting this expense" },
+        "dateMillis": { "type": "integer", "description": "Expense date epoch timestamp" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["id", "roomId", "title", "amountPaise", "paidByUid", "participantUids"]
+    },
+    "TransactionRecord": {
+      "title": "TransactionRecord",
+      "description": "Individual payment or settlement transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Transaction ID" },
+        "roomId": { "type": "string", "description": "Room ID" },
+        "expenseId": { "type": "string", "description": "Associated expense ID" },
+        "fromUid": { "type": "string", "description": "Debtor user ID" },
+        "fromName": { "type": "string", "description": "Debtor display name" },
+        "toUid": { "type": "string", "description": "Creditor user ID" },
+        "toName": { "type": "string", "description": "Creditor display name" },
+        "amountPaise": { "type": "integer", "description": "Payment amount in paise" },
+        "status": { "type": "string", "description": "PAID, PENDING, or OVERDUE" },
+        "upiDeepLink": { "type": "string", "description": "UPI intent payment URL" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["id", "roomId", "fromUid", "toUid", "amountPaise", "status"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile document indexed by Auth UID"
+    },
+    "/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Shared bachelor room workspace"
+    },
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Expense records partitioned by room"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "TransactionRecord",
+      "description": "Settlement transactions and UPI payment tracking"
+    }
+  }
+}

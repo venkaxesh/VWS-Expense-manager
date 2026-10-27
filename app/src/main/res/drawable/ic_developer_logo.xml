@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Outer Hexagonal Tech Badge -->
+    <path
+        android:fillColor="#064E3B"
+        android:pathData="M32,4 L56,18 L56,46 L32,60 L8,46 L8,18 Z" />
+    <!-- Inner Accent Border -->
+    <path
+        android:fillColor="#059669"
+        android:pathData="M32,8 L52,20 L52,44 L32,56 L12,44 L12,20 Z" />
+    <!-- Dark Inner Core -->
+    <path
+        android:fillColor="#111827"
+        android:pathData="M32,12 L48,22 L48,42 L32,52 L16,42 L16,22 Z" />
+    <!-- Code Brackets & Slash: '< / >' in Crisp Emerald -->
+    <!-- Left bracket '<' -->
+    <path
+        android:fillColor="#34D399"
+        android:pathData="M27,24 L22,32 L27,40 L24.5,41.5 L18.5,32 L24.5,22.5 Z" />
+    <!-- Slash '/' -->
+    <path
+        android:fillColor="#A7F3D0"
+        android:pathData="M34,22 L36.5,22.5 L30,42 L27.5,41.5 Z" />
+    <!-- Right bracket '>' -->
+    <path
+        android:fillColor="#34D399"
+        android:pathData="M37,24 L42,32 L37,40 L39.5,41.5 L45.5,32 L39.5,22.5 Z" />
+    <!-- Small Top Sparkle Dot -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M32,15 A2,2 0 1,1 32,19 A2,2 0 1,1 32,15 Z" />
+</vector>
